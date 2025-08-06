@@ -38,6 +38,8 @@ let list = document.querySelector(".list");
 let scoreHeading = document.querySelector(".score-heading");
 let answerQuestion = document.querySelectorAll(".answer-key-question");
 let answerKeyanswers = document.querySelectorAll(".answer-key-answer");
+let yourAnswer = document.querySelectorAll(".your-answer");
+let h5 = document.querySelectorAll("h5");
 
 let clickEvent = button.addEventListener("click", Ignition);
 
@@ -79,11 +81,19 @@ function startQuiz() {
       answerKeyanswers[b].style.display = "block";
     }
 
+    for (let c = 0; c < yourAnswer.length; c++) {
+      yourAnswer[c].innerText = slectOption[c];
+    }
+
     button.style.display = "none";
     para.style.display = "none";
     quiz.style.display = "none";
     score.style.display = "block";
     scoreHeading.style.display = "block";
+
+    for (let m = 0; m < h5.length; m++) {
+      h5[m].style.display = "block";
+    }
   }
 
   if (count <= 0) {
@@ -93,19 +103,19 @@ function startQuiz() {
 }
 
 let answerKEy = 0;
-let correctAnswer = [];
-let wrongAnswer = [];
 
+let slectOption = [];
 for (let k = 0; k < divOptions.length; k++) {
   divOptions[k].addEventListener("click", answer);
   function answer() {
     if (divOptions[k].innerText == data[i].answer) {
-      correctAnswer.push(divOptions[k].innerText);
+      slectOption.push(divOptions[k].innerText);
       ++answerKEy;
 
       score.innerHTML = answerKEy;
     } else {
-      wrongAnswer.push(divOptions[k].innerText);
+      slectOption.push(divOptions[k].innerText);
     }
   }
 }
+console.log(slectOption);
