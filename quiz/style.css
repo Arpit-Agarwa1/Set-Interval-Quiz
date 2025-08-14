@@ -1,49 +1,42 @@
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-#wrapper {
-  width: 100%;
-  height: 100vh;
-  background-color: #239ba7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.options {
+  color: blue;
+}
+
+.hidden {
+  display: block;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  /* margin: 50px auto; */
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid white;
+  background-color: rebeccapurple;
   color: white;
 }
 
-h5 {
-  display: none;
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.score,
-#quiz {
-  display: none;
-}
-button {
-  padding: 30px;
-  border-radius: 20px;
-  border: none;
-  font-size: 1.5rem;
-  background-color: #ececbb;
+.enable {
+  color: blue;
+  pointer-events: all;
 }
 
-#para {
-  font-size: 3rem;
-}
-.options,
-.questions {
-  font-size: 2rem;
-}
-.score-heading {
-  display: none;
-}
-
-.answer-key-question,
-.answer-key-answer {
-  display: none;
+.disable {
+  color: red;
+  pointer-events: none;
 }

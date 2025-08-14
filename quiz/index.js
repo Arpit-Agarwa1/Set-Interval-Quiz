@@ -1,5 +1,4 @@
 //DATA
-
 const data = [
   {
     question: "What is the capital of Australia?",
@@ -16,7 +15,7 @@ const data = [
   {
     question: "What is the capital of Israel?",
     answer: "Jeruslam",
-    options: ["Tel Aviv", "Jeruslam", "Queensland", "Perth"],
+    options: ["Tel Aviv", "Jerusalem", "Queensland", "Perth"],
   },
 
   {
@@ -27,95 +26,60 @@ const data = [
 ];
 
 let button = document.querySelector("button");
-let quiz = document.querySelector("#quiz");
-let question = document.querySelector(".question");
-let divOptions = document.querySelectorAll(".option");
-let para = document.querySelector("#para");
-let score = document.querySelector(".score");
-let correct = document.querySelector(".correct");
-let wrong = document.querySelector(".wrong");
-let list = document.querySelector(".list");
-let scoreHeading = document.querySelector(".score-heading");
-let answerQuestion = document.querySelectorAll(".answer-key-question");
-let answerKeyanswers = document.querySelectorAll(".answer-key-answer");
-let yourAnswer = document.querySelectorAll(".your-answer");
-let h5 = document.querySelectorAll("h5");
+let quiz = document.querySelector(".quiz");
+let timer = document.querySelector(".timer");
+let option = document.querySelectorAll(".option");
+let bunch = document.querySelector(".bunch");
+let questions = document.querySelector(".question");
 
-let clickEvent = button.addEventListener("click", Ignition);
-
-let i = 0;
 let count = 5;
+let questionNumber = 0;
+
+quiz.style.display = "none";
+
+button.addEventListener("click", initialize);
 let countdown;
 
-function Ignition() {
-  startQuiz();
-  countdown = setInterval(startQuiz, 1000);
+function initialize() {
+  button.style.display = "none";
+  quiz.style.display = "block";
+  countdown = setInterval(quizStart, 1000);
+  quizStart();
 }
 
-function startQuiz() {
-  button.style.display = "none";
+function quizStart() {
+  if (questionNumber < data.length) {
+    questions.innerText = data[questionNumber].question;
+    Options();
 
-  quiz.style.display = "block";
-
-  if (i < data.length) {
-    question.innerText = data[i].question;
-
-    for (let j = 0; j < divOptions.length; j++) {
-      divOptions[j].innerText = data[i].options[j];
-    }
-
-    para.innerText = count--;
-    // answerQuestion.innerText = data[i].question;
-    // answerKeyanswers.innerText = data[i].answer;
+    tikTik();
   } else {
     clearInterval(countdown);
-
-    for (let a = 0; a < answerQuestion.length; a++) {
-      answerQuestion[a].innerText = data[a].question;
-
-      answerQuestion[a].style.display = "block";
-    }
-
-    for (let b = 0; b < answerKeyanswers.length; b++) {
-      answerKeyanswers[b].innerText = data[b].answer;
-      answerKeyanswers[b].style.display = "block";
-    }
-
-    for (let c = 0; c < yourAnswer.length; c++) {
-      yourAnswer[c].innerText = slectOption[c];
-    }
-
-    button.style.display = "none";
-    para.style.display = "none";
-    quiz.style.display = "none";
-    score.style.display = "block";
-    scoreHeading.style.display = "block";
-
-    for (let m = 0; m < h5.length; m++) {
-      h5[m].style.display = "block";
-    }
   }
+}
 
+function Options() {
+  for (let i = 0; i < data.length; i++) {
+    option[i].innerText = data[questionNumber].options[i];
+    selectOption();
+  }
+}
+
+function tikTik() {
+  timer.innerText = count--;
   if (count <= 0) {
     count = 5;
-    i++;
+    questionNumber++;
   }
 }
 
-let answerKEy = 0;
-
-let slectOption = [];
-for (let k = 0; k < divOptions.length; k++) {
-  divOptions[k].addEventListener("click", answer);
-  function answer() {
-    if (divOptions[k].innerText == data[i].answer) {
-      slectOption.push(divOptions[k].innerText);
-      ++answerKEy;
-
-      score.innerHTML = answerKEy;
-    } else {
-      slectOption.push(divOptions[k].innerText);
-    }
+function selectOption() {
+  for (let i = 0; i < data.length; i++) {
+    option[i].addEventListener("click", lockOption);
+  }
+  function lockOption(e) {
+    // e.target.classList.add("enable");
+    e.target.classList.add("enable");
+    // e.target.style.color = "blue";
   }
 }
-console.log(slectOption);

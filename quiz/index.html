@@ -3,85 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="index.js" />
+    <title>Document</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="main">
-      <div id="wrapper">
-        <button>Start Quiz</button>
+    <div class="wrapper">
+      <button class="hidden">Start Quizz</button>
 
-        <p id="para"></p>
+      <div class="quiz hidden">
+        <h1 class="timer">Timer</h1>
 
-        <div id="quiz">
-          <h1 class="question"></h1>
-          <div class="options">
-            <p class="option"></p>
-            <p class="option"></p>
-            <p class="option"></p>
-            <p class="option"></p>
-          </div>
+        <h1 class="question">Farziii ?????</h1>
+        <div class="bunch">
+          <div class="option disable">FAZRI</div>
+          <div class="option disable">FAZRI</div>
+          <div class="option disable">FAZRI</div>
+          <div class="option disable">FAZRI</div>
         </div>
-        <br />
-        <br />
-
-        <h3 class="score-heading">
-          Your final Score is
-          <h3 class="score"></h3>
-        </h3>
-
-
-        <div class="answer-key-question"></div>
-          <div class="answer-key-answer"></div>
-
-
-            <h5>Your Answer</h5>
-            <div class="your-answer"></div>
-
-
-
-            <div class="answer-key-question"></div>
-          <div class="answer-key-answer"></div>
-
-
-            <h5>Your Answer</h5>
-            <div class="your-answer"></div>
-
-
-
-
-
-            <div class="answer-key-question"></div>
-          <div class="answer-key-answer"></div>
-
-
-            <h5>Your Answer</h5>
-            <div class="your-answer"></div>
-
-
-
-            <div class="answer-key-question"></div>
-          <div class="answer-key-answer"></div>
-
-
-            <h5>Your Answer</h5>
-            <div class="your-answer"></div>
-
-
-          
-         
-
-
-        
+      </div>
     </div>
+
+    <div class="score"></div>
 
     <script src="index.js"></script>
   </body>
