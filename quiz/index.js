@@ -29,6 +29,7 @@ let button = document.querySelector("button");
 let quiz = document.querySelector(".quiz");
 let timer = document.querySelector(".timer");
 let option = document.querySelectorAll(".option");
+let fun = document.querySelectorAll(".fun");
 let bunch = document.querySelector(".bunch");
 let questions = document.querySelector(".question");
 
@@ -43,15 +44,14 @@ let countdown;
 function initialize() {
   button.style.display = "none";
   quiz.style.display = "block";
-  countdown = setInterval(quizStart, 1000);
   quizStart();
+  countdown = setInterval(quizStart, 1000);
 }
 
 function quizStart() {
   if (questionNumber < data.length) {
     questions.innerText = data[questionNumber].question;
     Options();
-
     tikTik();
   } else {
     clearInterval(countdown);
@@ -61,15 +61,29 @@ function quizStart() {
 function Options() {
   for (let i = 0; i < data.length; i++) {
     option[i].innerText = data[questionNumber].options[i];
-    selectOption();
+
+    // console.log(option[i]);
   }
+  selectOption();
 }
 
 function tikTik() {
-  timer.innerText = count--;
+  console.log(count);
   if (count <= 0) {
     count = 5;
     questionNumber++;
+    resetColor();
+    console.log(5, count);
+  } else {
+    timer.innerText = count--;
+    console.log(count);
+  }
+}
+
+function resetColor() {
+  for (let i = 0; i < data.length; i++) {
+    option[i].style.color = "blue";
+    bunch.style.pointerEvents = "all";
   }
 }
 
@@ -77,9 +91,21 @@ function selectOption() {
   for (let i = 0; i < data.length; i++) {
     option[i].addEventListener("click", lockOption);
   }
-  function lockOption(e) {
-    // e.target.classList.add("enable");
-    e.target.classList.add("enable");
-    // e.target.style.color = "blue";
-  }
 }
+
+function lockOption(e) {
+  e.target.style.color = "red";
+
+  if (e.target.style.color == "red") {
+    bunch.style.pointerEvents = "none";
+  }
+
+  // console.log(e.target);
+  // option[i].classList.add("disable");
+}
+
+// function disableOpt() {
+//   for (let i = 0; i < data.length; i++) {
+//     option[i].classList.add("disable");
+//   }
+// }

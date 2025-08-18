@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-.options {
+.option {
   color: blue;
 }
 
@@ -33,7 +33,7 @@ button {
 
 .enable {
   color: blue;
-  pointer-events: all;
+  /* pointer-events: all; */
 }
 
 .disable {
