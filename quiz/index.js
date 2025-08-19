@@ -23,6 +23,13 @@ const data = [
     answer: "Tokyo",
     options: ["Okaido", "Kyoto", "Tokyo", "Nagasaki"],
   },
+  {
+    question: {
+      image:
+        "https://nycwatercruises.com/cdn/shop/articles/1.png?v=1692377230&width=1100",
+      text: "In which city this thi g is loctated",
+    },
+  },
 ];
 
 let button = document.querySelector("button");
@@ -44,18 +51,39 @@ let countdown;
 function initialize() {
   button.style.display = "none";
   quiz.style.display = "block";
-  quizStart();
+  displayQuestion();
+  Options();
+  tikTik();
+
   countdown = setInterval(quizStart, 1000);
 }
 
 function quizStart() {
-  if (questionNumber < data.length) {
-    questions.innerText = data[questionNumber].question;
-    Options();
-    tikTik();
+  // if (questionNumber < data.length) {
+  //   Options();
+  //   tikTik();
+  // } else {
+  //   clearInterval(countdown);
+  // }
+
+  if (count <= 0) {
+    if (questionNumber >= data.length) {
+      clearInterval(countdown);
+    } else {
+      count = 5;
+      questionNumber++;
+      resetColor();
+      displayQuestion();
+      Options();
+      tikTik();
+    }
   } else {
-    clearInterval(countdown);
+    timer.innerText = count--;
   }
+}
+
+function displayQuestion() {
+  questions.innerText = data[questionNumber].question;
 }
 
 function Options() {
@@ -68,16 +96,18 @@ function Options() {
 }
 
 function tikTik() {
-  console.log(count);
-  if (count <= 0) {
-    count = 5;
-    questionNumber++;
-    resetColor();
-    console.log(5, count);
-  } else {
-    timer.innerText = count--;
-    console.log(count);
-  }
+  timer.innerText = count--;
+
+  // console.log(count);
+  // if (count <= 0) {
+  //   count = 5;
+  //   questionNumber++;
+  //   resetColor();
+  //   console.log(5, count);
+  // } else {
+  //   timer.innerText = count--;
+  //   console.log(count);
+  // }
 }
 
 function resetColor() {
