@@ -27,8 +27,10 @@ const data = [
     question: {
       image:
         "https://nycwatercruises.com/cdn/shop/articles/1.png?v=1692377230&width=1100",
-      text: "In which city this thi g is loctated",
+      text: "In which city this thing is loctated",
     },
+    answer: "New York",
+    options: ["california ", "New York", "Texas", "Korea"],
   },
 ];
 
@@ -40,7 +42,7 @@ let fun = document.querySelectorAll(".fun");
 let bunch = document.querySelector(".bunch");
 let questions = document.querySelector(".question");
 
-let count = 5;
+let count = 2;
 let questionNumber = 0;
 
 quiz.style.display = "none";
@@ -70,7 +72,7 @@ function quizStart() {
     if (questionNumber >= data.length) {
       clearInterval(countdown);
     } else {
-      count = 5;
+      count = 2;
       questionNumber++;
       resetColor();
       displayQuestion();
@@ -83,11 +85,19 @@ function quizStart() {
 }
 
 function displayQuestion() {
-  questions.innerText = data[questionNumber].question;
+  console.log(question);
+  if (typeof data[questionNumber].question == "object") {
+    let images = document.createElement("img");
+    questions.append(images);
+    images.src = data[questionNumber].question.image;
+    questions.innerText = data[questionNumber].question.text;
+  } else {
+    questions.innerText = data[questionNumber].question;
+  }
 }
 
 function Options() {
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < option.length; i++) {
     option[i].innerText = data[questionNumber].options[i];
 
     // console.log(option[i]);
@@ -111,14 +121,14 @@ function tikTik() {
 }
 
 function resetColor() {
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < option.length; i++) {
     option[i].style.color = "blue";
     bunch.style.pointerEvents = "all";
   }
 }
 
 function selectOption() {
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < option.length; i++) {
     option[i].addEventListener("click", lockOption);
   }
 }
