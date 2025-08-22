@@ -14,7 +14,7 @@ const data = [
 
   {
     question: "What is the capital of Israel?",
-    answer: "Jeruslam",
+    answer: "Jerusalem",
     options: ["Tel Aviv", "Jerusalem", "Queensland", "Perth"],
   },
 
@@ -27,7 +27,7 @@ const data = [
     question: {
       image:
         "https://nycwatercruises.com/cdn/shop/articles/1.png?v=1692377230&width=1100",
-      text: "In which city this thing is loctated",
+      text: "In which city this thing is located ??",
     },
     answer: "New York",
     options: ["california ", "New York", "Texas", "Korea"],
@@ -41,11 +41,14 @@ let option = document.querySelectorAll(".option");
 let fun = document.querySelectorAll(".fun");
 let bunch = document.querySelector(".bunch");
 let questions = document.querySelector(".question");
+let score = document.querySelector(".score");
+let points = document.querySelector(".score-points");
 
-let count = 2;
+let count = 5;
 let questionNumber = 0;
 
 quiz.style.display = "none";
+score.style.display = "none";
 
 button.addEventListener("click", initialize);
 let countdown;
@@ -69,10 +72,15 @@ function quizStart() {
   // }
 
   if (count <= 0) {
-    if (questionNumber >= data.length) {
+    if (questionNumber >= data.length - 1) {
       clearInterval(countdown);
+
+      quiz.style.display = "none";
+      score.style.display = "block";
+      points.innerText = marks;
+      answerKey();
     } else {
-      count = 2;
+      count = 5;
       questionNumber++;
       resetColor();
       displayQuestion();
@@ -85,12 +93,19 @@ function quizStart() {
 }
 
 function displayQuestion() {
-  console.log(question);
+  questions.innerText = "";
   if (typeof data[questionNumber].question == "object") {
     let images = document.createElement("img");
     questions.append(images);
     images.src = data[questionNumber].question.image;
-    questions.innerText = data[questionNumber].question.text;
+
+    let text = document.createElement("span");
+
+    text.innerText = data[questionNumber].question.text;
+
+    questions.append(text);
+
+    // questions.innerText = data[questionNumber].question.text;
   } else {
     questions.innerText = data[questionNumber].question;
   }
@@ -122,7 +137,7 @@ function tikTik() {
 
 function resetColor() {
   for (let i = 0; i < option.length; i++) {
-    option[i].style.color = "blue";
+    option[i].style.color = "white";
     bunch.style.pointerEvents = "all";
   }
 }
@@ -133,19 +148,47 @@ function selectOption() {
   }
 }
 
+let correctAnswers = [];
+
+let marks = 0;
+
 function lockOption(e) {
   e.target.style.color = "red";
 
   if (e.target.style.color == "red") {
     bunch.style.pointerEvents = "none";
+    // console.log(e.target);
   }
 
-  // console.log(e.target);
-  // option[i].classList.add("disable");
+  if (e.target.innerText == data[questionNumber].answer) {
+    ++marks;
+
+    correctAnswers.push(e.target.innerText);
+    console.log(correctAnswers, marks);
+  } else {
+    correctAnswers.push(e.target.innerText);
+    console.log(correctAnswers, marks);
+  }
 }
 
-// function disableOpt() {
-//   for (let i = 0; i < data.length; i++) {
-//     option[i].classList.add("disable");
-//   }
-// }
+function answerKey() {
+  for (let i = 0; i < data.length; i++) {
+    let questionKey = document.createElement("div");
+    let correct = document.createElement("div");
+    let yourAns = document.createElement("div");
+
+    if (typeof data[i].question == "object") {
+      questionKey.innerText =
+        "Question" + " " + ":" + " " + data[i].question.text;
+    } else {
+      questionKey.innerText = "Question" + " " + ":" + " " + data[i].question;
+    }
+
+    correct.innerText = "Correct Answer" + " " + ":" + " " + data[i].answer;
+    yourAns.innerText = "Your Answer" + " " + ":" + " " + correctAnswers[i];
+
+    score.append(questionKey);
+    score.append(correct);
+    score.append(yourAns);
+  }
+}
